@@ -26,10 +26,11 @@ const std::vector<std::pair<std::string, std::vector<Token>>> LexerTestcases = {
      }},
 
     // Arithmetic
-    {"+=/%*",
+    {"+-/=%*",
      {{"+", TokenType::PLUS},
       {"-", TokenType::MINUS},
       {"/", TokenType::DIVIDE},
+      {"=", TokenType::ASSIGNMENT},
       {"%", TokenType::MODULO},
       {"*", TokenType::STAR}}},
 
@@ -44,10 +45,11 @@ const std::vector<std::pair<std::string, std::vector<Token>>> LexerTestcases = {
      }},
 
     // Comparison
-    {"!===>>=<<=",
+    {"!====>>=<<=",
      {
          {"!=", TokenType::BANG_EQUAL},
          {"==", TokenType::EQUAL_EQUAL},
+         {"=", TokenType::ASSIGNMENT},
          {">", TokenType::GREATER},
          {">=", TokenType::GREATER_EQUAL},
          {"<", TokenType::LESSER},

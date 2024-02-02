@@ -1,9 +1,19 @@
+#include <cstring>
 #include <iostream>
 #include <string>
 
 #include "settings.hpp"
 
+#include "lexer/Lexer.hpp"
+#include "tests/Tests.hpp"
+#include "tokens/Token.hpp"
+
 int main(int argc, char *argv[]) {
+  if (!std::strcmp(argv[1], "test")) {
+    Tests::lexerTests();
+    return 0;
+  }
+
   if (argc > 2) {
     std::cout << "usage: pseudo [file].pdc" << std::endl;
   } else if (argc == 2) {
@@ -25,7 +35,11 @@ int main(int argc, char *argv[]) {
         break;
       }
 
-      // TODO: Add lexer code here
+      Lexer lexer(input);
+
+      for (Token token : lexer.tokenize()) {
+        std::cout << token.literal << "\n";
+      }
 
       std::cout << ">>> ";
     }
