@@ -10,9 +10,9 @@ BUILDDIR = build
 
 # Source files
 SOURCES = $(SRCDIR)/lexer/Lexer.cpp \
-		  $(SRCDIR)/tokens/Tokens.cpp \
-		  $(SRCDIR)/tests/Tests.cpp \
-		  $(SRCDIR)/Main.cpp
+          $(SRCDIR)/tests/Tests.cpp \
+          $(SRCDIR)/tokens/TokenType.cpp \
+          $(SRCDIR)/Main.cpp
 
 # Object files
 OBJECTS = $(SOURCES:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
@@ -20,7 +20,12 @@ OBJECTS = $(SOURCES:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 # Executable name
 EXEC = pseudo
 
-all: $(EXEC)
+all: $(BUILDDIR) $(EXEC)
+
+$(BUILDDIR):
+	@mkdir -p $(BUILDDIR)/lexer
+	@mkdir -p $(BUILDDIR)/tests
+	@mkdir -p $(BUILDDIR)/tokens
 
 $(EXEC): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
@@ -33,4 +38,8 @@ clean:
 	rm -rf $(BUILDDIR)/*
 	rm -f $(EXEC)
 
+test:
+
+
 .PHONY: clean
+
