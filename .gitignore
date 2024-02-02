@@ -25,3 +25,8 @@
 *.la
 *.a
 *.lib
+
+# Build
+temp.txt
+pseudo
+build/

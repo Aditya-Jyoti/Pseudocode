@@ -1,32 +1,36 @@
+# Compiler
 CXX = g++
-CXXFLAGS = -Wall -std=c++17
-LDFLAGS =
 
-SRC_DIR = src
-BUILD_DIR = build
+# Compiler flags
+CXXFLAGS = -Wall -std=c++11
 
-SRC_FILES = $(shell find $(SRC_DIR) -name '*.cpp')
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRC_FILES))
-DEP_FILES = $(OBJ_FILES:.o=.d)
+# Directories
+SRCDIR = src
+BUILDDIR = build
 
-EXECUTABLE = pseudo
+# Source files
+SOURCES = $(SRCDIR)/lexer/Lexer.cpp \
+		  $(SRCDIR)/tokens/Tokens.cpp \
+		  $(SRCDIR)/tests/Tests.cpp \
+		  $(SRCDIR)/Main.cpp
 
-all: $(BUILD_DIR)/$(EXECUTABLE)
+# Object files
+OBJECTS = $(SOURCES:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 
-$(BUILD_DIR)/$(EXECUTABLE): $(OBJ_FILES)
+# Executable name
+EXEC = pseudo
+
+all: $(EXEC)
+
+$(EXEC): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(LDFLAGS) $^ -o $@
-
--include $(DEP_FILES)
-
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_FILES) $(DEP_FILES)
+	rm -rf $(BUILDDIR)/*
+	rm -f $(EXEC)
 
-run: all
-	./$(BUILD_DIR)/$(EXECUTABLE)
-
-.PHONY: all clean run
+.PHONY: clean
