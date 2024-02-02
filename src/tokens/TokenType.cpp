@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-std::map<std::string, TokenType> TokenMap = {
+std::map<std::string, TokenType> SingleCharacterMap = {
     {"+", TokenType::PLUS},
     {"-", TokenType::MINUS},
     {"*", TokenType::STAR},
@@ -24,18 +24,19 @@ std::map<std::string, TokenType> TokenMap = {
     {";", TokenType::SEMICOLON},
     {":", TokenType::COLON},
     {",", TokenType::COMMA},
+    {".", TokenType::DOT},
     {"\'", TokenType::SINGLE_QUOTE},
     {"\"", TokenType::DOUBLE_QUOTE},
     {"\0", TokenType::EOF_TOKEN},
+};
 
-    {"!=", TokenType::BANG_EQUAL},
-    {"==", TokenType::EQUAL_EQUAL},
-    {">=", TokenType::GREATER_EQUAL},
-    {"<=", TokenType::LESSER_EQUAL},
-    {"+=", TokenType::PLUS_EQUAL},
-    {"-=", TokenType::MINUS_EQUAL},
-    {"++", TokenType::PLUS_PLUS},
-    {"--", TokenType::MINUS_MINUS},
+std::map<std::string, TokenType> DoubleCharacterMap = {
+    {"!=", TokenType::BANG_EQUAL},    {"==", TokenType::EQUAL_EQUAL},
+    {">=", TokenType::GREATER_EQUAL}, {"<=", TokenType::LESSER_EQUAL},
+    {"+=", TokenType::PLUS_EQUAL},    {"-=", TokenType::MINUS_EQUAL},
+    {"++", TokenType::PLUS_PLUS},     {"--", TokenType::MINUS_MINUS},
+};
 
+std::map<std::string, TokenType> MultipleCharacterMap = {
     {"define", TokenType::DEFINE},
 };

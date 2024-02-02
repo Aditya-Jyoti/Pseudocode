@@ -15,7 +15,6 @@ private:
 
   char currChar;
   char nextChar;
-  std::string currWord;
 
   std::vector<Token> tokens;
 
@@ -23,10 +22,11 @@ private:
 
   Token getToken(const std::string &input);
 
-  void handleStrings(const char &quoteType);
+  void handleStrings(const char &quote);
+  void handleWords(const std::string &word);
 
-  void handleCharacters();
-  void handleWords();
+  bool handleDoubleCharacters(const std::string &characters);
+  void handleSingleCharacter(const std::string &character);
 
 public:
   Lexer() = default;

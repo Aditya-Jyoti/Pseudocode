@@ -93,6 +93,8 @@ enum TokenType {
   UNDEFINED
 };
 
-extern std::map<std::string, TokenType> TokenMap;
+extern std::map<std::string, TokenType> SingleCharacterMap;
+extern std::map<std::string, TokenType> DoubleCharacterMap;
+extern std::map<std::string, TokenType> MultipleCharacterMap;
 
 #endif
