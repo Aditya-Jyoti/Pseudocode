@@ -1,5 +1,6 @@
 #include "Lexer.hpp"
 
+#include <cctype>
 #include <string>
 #include <vector>
 
@@ -62,6 +63,75 @@ void Lexer::handleSingleCharacter(const std::string &character) {
   this->tokens.push_back(token);
 }
 
+// check if characters are enclosed in quotes
+bool Lexer::handleStrings(const char &quote) {
+
+  std::string currString;
+
+  while (this->nextChar != quote) {
+
+    // ending quote not found on current line
+    if (this->nextPosition > static_cast<int>(this->input.length())) {
+      // TODO: raise an error
+      return false;
+    }
+
+    // add character to string and move forward
+    currString += std::string(1, this->nextChar);
+    this->nextPosition++;
+    this->nextChar = this->input[this->nextPosition];
+  }
+
+  // character enclosed in quote
+  Token token;
+  token.type = TokenType::STRING;
+  token.literal = currString;
+
+  this->tokens.push_back(token);
+  return true;
+}
+
+// check if characters are a number (integer or decimal)
+bool Lexer::handleNumbers() {
+    std::string currNumber;
+    bool hasDecimalPoint = false;
+
+    currNumber += std::string(1, this->currChar);
+
+    // check if character is a number (has decimal or not)
+    while (std::isdigit(this->nextChar) || this->nextChar == '.') {
+
+        if (this->nextChar == '.') {
+            if (hasDecimalPoint) {
+                // TODO: Raise error
+                return false;
+            } else {
+                hasDecimalPoint = true;
+            }
+        }
+
+        // add character to string and move forward
+        currNumber += std::string(1, this->nextChar);
+        this->nextPosition++;
+        this->nextChar = this->input[this->nextPosition];
+    }
+
+    Token token;
+    
+    // if legal decimal points then its a decimal num
+    if (hasDecimalPoint) {
+        token.type = TokenType::DECIMAL;
+    } else {
+        token.type = TokenType::INTEGER;
+    }
+
+    token.literal = currNumber;
+
+    this->tokens.push_back(token);
+
+    return true;
+}
+
 // convert characters to tokens and return a vector
 std::vector<Token> Lexer::tokenize() {
 
@@ -113,6 +183,34 @@ std::vector<Token> Lexer::tokenize() {
         this->next();
         continue;
       }
+    }
+
+    // check if current char is a quote and hence sequence is a
+    // string or not
+    if (this->currChar == '\"' || this->currChar == '\'') {
+      if (this->handleStrings(this->currChar)) {
+
+        this->nextPosition++;
+        this->next();
+
+        continue;
+      } else {
+
+        this->nextPosition = this->currPosition + 1;
+      }
+    }
+
+    // check if current char is a digit and hence sequence is a
+    // number or not
+    if (std::isdigit(this->currChar)) {
+        // TODO: Fix multiple digit issue
+        if (this->handleNumbers()) {
+            this->next();
+            continue;
+        } else {
+            this->nextPosition = this->currPosition + 1;
+            this->nextChar = this->input[this->nextPosition];
+        }
     }
 
     // check if single characters are legal or not

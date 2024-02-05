@@ -22,7 +22,9 @@ private:
 
   Token getToken(const std::string &input);
 
-  void handleStrings(const char &quote);
+  bool handleStrings(const char &quote);
+  bool handleNumbers();
+
   void handleWords(const std::string &word);
 
   bool handleDoubleCharacters(const std::string &characters);

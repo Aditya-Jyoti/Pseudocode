@@ -9,7 +9,7 @@
 #include "tokens/Token.hpp"
 
 int main(int argc, char *argv[]) {
-  if (!std::strcmp(argv[1], "test")) {
+  if (argv[1] && !std::strcmp(argv[1], "test")) {
     Tests::lexerTests();
     return 0;
   }
