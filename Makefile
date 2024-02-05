@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -Wall -std=c++11
+CXXFLAGS = -Wall -std=c++17
 
 # Directories
 SRCDIR = src
@@ -39,6 +39,8 @@ clean:
 	rm -f $(EXEC)
 
 test:
+	make
+	./pseudo test
 
 
 .PHONY: clean
