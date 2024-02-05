@@ -9,15 +9,13 @@
 
 const std::vector<std::pair<std::string, std::vector<Token>>> LexerTestcases = {
     // Single character tokens
-    {"{([;:\"\',.])}",
+    {"{([;:,.])}",
      {
          {"{", TokenType::LEFT_BRACE},
          {"(", TokenType::LEFT_PARENTHESIS},
          {"[", TokenType::LEFT_BRACKET},
          {";", TokenType::SEMICOLON},
          {":", TokenType::COLON},
-         {"\"", TokenType::DOUBLE_QUOTE},
-         {"\'", TokenType::SINGLE_QUOTE},
          {",", TokenType::COMMA},
          {".", TokenType::DOT},
          {"]", TokenType::RIGHT_BRACKET},
@@ -69,6 +67,22 @@ const std::vector<std::pair<std::string, std::vector<Token>>> LexerTestcases = {
      {
          {"define", TokenType::DEFINE},
          {"hello", TokenType::IDENTIFIER},
-     }}};
+     }},
+
+    // datatypes
+    // // string
+    {"\"test1\" \'test2\'",
+     {
+         {"test1", TokenType::STRING},
+         {"test2", TokenType::STRING},
+     }},
+
+    {"12 12.3",
+     {
+         {"12", TokenType::INTEGER},
+         {"12.3", TokenType::DECIMAL},
+     }},
+
+};
 
 #endif
