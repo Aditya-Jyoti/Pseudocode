@@ -12,6 +12,7 @@ BUILDDIR = build
 SOURCES = $(SRCDIR)/lexer/Lexer.cpp \
           $(SRCDIR)/tests/Tests.cpp \
           $(SRCDIR)/tokens/TokenType.cpp \
+          $(SRCDIR)/utility/Error.cpp \
           $(SRCDIR)/Main.cpp
 
 # Object files

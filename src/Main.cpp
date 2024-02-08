@@ -29,16 +29,15 @@ int main(int argc, char *argv[]) {
 
     std::string input;
     while (getline(std::cin, input)) {
-      std::cout << input << "\n";
-
       if (input == "exit" || input == "quit") {
         break;
       }
 
       Lexer lexer(input);
+      std::vector<Token> tokens = lexer.tokenize();
 
-      for (Token token : lexer.tokenize()) {
-        std::cout << token.literal << "\n";
+      if (lexer.hasError) {
+        std::cout << input << "\n";
       }
 
       std::cout << ">>> ";

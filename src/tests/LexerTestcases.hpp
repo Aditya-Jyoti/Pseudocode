@@ -63,10 +63,12 @@ const std::vector<std::pair<std::string, std::vector<Token>>> LexerTestcases = {
      }},
 
     // Keywords
-    {"define hello",
+    {"define hello do end",
      {
          {"define", TokenType::DEFINE},
          {"hello", TokenType::IDENTIFIER},
+         {"do", TokenType::DO},
+         {"end", TokenType::END},
      }},
 
     // datatypes

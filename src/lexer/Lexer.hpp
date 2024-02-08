@@ -10,6 +10,8 @@ class Lexer {
 private:
   std::string input;
 
+  int rowNumber = 0;
+
   int currPosition = 0;
   int nextPosition = 1;
 
@@ -33,6 +35,8 @@ private:
 public:
   Lexer() = default;
   Lexer(const std::string input) : input(input) {}
+
+  bool hasError = false;
 
   std::vector<Token> tokenize();
 };

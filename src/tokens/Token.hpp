@@ -12,7 +12,9 @@ struct Token {
   Token() = default;
   Token(std::string literal, TokenType type) : literal(literal), type(type) {}
 
-  bool operator==(const Token &RHS) const { return this->type == RHS.type && this->literal == RHS.literal; }
+  bool operator==(const Token &RHS) const {
+    return this->type == RHS.type && this->literal == RHS.literal;
+  }
 };
 
 #endif
