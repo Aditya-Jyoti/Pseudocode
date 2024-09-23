@@ -1,0 +1,11 @@
+// method 1: program to print first 5 numbers
+
+while variable <= 5 do
+    increment variable by 1
+end while 
+
+// method 2: program to print first 5 numbers
+
+while variable <= 5 do 
+    variable = variable + 1
+end while 

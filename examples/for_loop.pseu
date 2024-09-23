@@ -1,0 +1,11 @@
+// method 1: program to print first 5 numbers
+
+for number in range 0 to 5 do 
+    print(number)
+end for
+
+// method 2: program to print first 5 numbers 
+
+for { number | number E N; number <= 5 } do 
+    print(number)
+end for

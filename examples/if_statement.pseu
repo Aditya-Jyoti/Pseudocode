@@ -1,0 +1,11 @@
+// method 1: program to check if age is between 0 and 5
+
+if age between 0 to 5 do
+    print(age)
+end if 
+
+// method 2: program to check if age is between 0 and 5
+
+if 0 < age < 5 do 
+    print(age)
+end if
